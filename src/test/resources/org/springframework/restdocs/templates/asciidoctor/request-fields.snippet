@@ -1,0 +1,12 @@
+|===
+|Path|Type|Description|Optional|Constraint
+
+{{#fields}}
+|{{path}}
+|{{type}}
+|{{description}}
+|{{#optional}}Y{{/optional}}
+// 참일때만 보여줘라, if문 삽입 가능
+|{{#constraint}} {{.}} {{/constraint}}
+{{/fields}}
+|===
