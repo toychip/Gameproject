@@ -38,6 +38,7 @@ public class SecurityConfig {
                     .requestMatchers("/auth/signup").permitAll() // 누구나 접근 가능
                     .requestMatchers("/auth/login").permitAll() // 누구나 접근 가능
 
+
                 .anyRequest().authenticated()
 
                 .and()
