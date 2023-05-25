@@ -24,20 +24,8 @@ public class Member {
     private String password;
     private LocalDateTime createdAt;
 
-
-    // Spring Security 적용할것이므로 주석처리
-//
-//    @OneToMany(cascade = CascadeType.ALL, mappedBy = "member")
-//    private List<Session> sessions = new ArrayList<>();
-
-
-//    public Session addSession(){
-//        Session session = Session.builder()
-//                .member(this)
-//                .build();
-//        sessions.add(session);
-//        return session;
-//    }
+    @OneToMany(fetch = FetchType.LAZY, mappedBy = "member")
+    private List<Post> postList = new ArrayList<>();
 
     @Builder
     public Member(String name, String email, String password) {
@@ -45,5 +33,8 @@ public class Member {
         this.email = email;
         this.password = password;
         this.createdAt = LocalDateTime.now();
+    }
+    public void mappingPost(Post post) {
+        postList.add(post);
     }
 }
