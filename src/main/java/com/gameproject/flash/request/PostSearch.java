@@ -16,11 +16,11 @@ public class PostSearch {
     @Builder.Default
     private Integer size = 10;
 
-//    @Builder
-//    public PostSearch(Integer page, Integer size) {
-//        this.page = page; // page가 null이면 default 값은 1로
-//        this.size = size;
-//    }
+    @Builder
+    public PostSearch(Integer page, Integer size) {
+        this.page = (page == null) ? 1 : page;
+        this.size = (size == null) ? 10 : size;
+    }
 
     public long getOffset(){
         return (long) (Math.max(1, page) - 1) * Math.min(size, MAX_SIZE);

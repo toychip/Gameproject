@@ -36,8 +36,8 @@ public class SecurityConfig {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .and()
-                .cors()
-                .and()
+//                .cors()
+//                .and()
                 .authorizeHttpRequests()
                     .requestMatchers("/auth/signup").permitAll() // 누구나 접근 가능
                     .requestMatchers("/auth/login").permitAll() // 누구나 접근 가능
@@ -84,7 +84,7 @@ public class SecurityConfig {
         CorsConfiguration config = new CorsConfiguration();
 
         config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:8080");
+        config.addAllowedOrigin("http://localhost:3000"); // Here! 원래 "http://localhost:8080" 부분을 수정해야 합니다.
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
 
