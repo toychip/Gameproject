@@ -5,10 +5,12 @@ import com.amazonaws.services.s3.AmazonS3;
 import com.amazonaws.services.s3.model.S3Object;
 import com.gameproject.flash.domian.Game;
 import com.gameproject.flash.repository.GameRepository;
+import com.gameproject.flash.response.GameResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 @RequiredArgsConstructor
@@ -24,5 +26,11 @@ public class GameService {
         // 대신 S3의 URL을 게임 엔티티에 저장하고 클라이언트가 URL로부터 직접 다운로드하도록 하는 것이 효율적일 수 있습니다.
 
         return gameRepository.findAll();
+    }
+
+    public GameResponse get(Integer id) {
+        Game game = gameRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException(id + "는 없는 id입니다."));
+        return new GameResponse(game);
     }
 }

@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.ttt'
-version = '0.2.1-ChangeNumberPerPage'
+version = '1.3.0_PostForbidden'
 sourceCompatibility = '17'
 
 configurations {
