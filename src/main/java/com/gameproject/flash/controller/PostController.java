@@ -5,6 +5,7 @@ import com.gameproject.flash.domian.Post;
 import com.gameproject.flash.request.PostCreate;
 import com.gameproject.flash.request.PostEdit;
 import com.gameproject.flash.request.PostSearch;
+import com.gameproject.flash.response.AuthResponse;
 import com.gameproject.flash.response.PostResponse;
 import com.gameproject.flash.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -60,33 +61,13 @@ public class PostController {
         postService.edit(postId, request);
     }
 
-
     @DeleteMapping("/posts/{postId}")
     public void delete(@PathVariable Long postId){
         postService.delete(postId);
     }
+
+    @GetMapping("/mypage")
+    public AuthResponse getMemberInfo() {
+        return postService.getCurrentMemberInfo();
+    }
 }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-

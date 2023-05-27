@@ -9,6 +9,7 @@ import com.gameproject.flash.repository.PostRepository;
 import com.gameproject.flash.request.PostCreate;
 import com.gameproject.flash.request.PostEdit;
 import com.gameproject.flash.request.PostSearch;
+import com.gameproject.flash.response.AuthResponse;
 import com.gameproject.flash.response.PostResponse;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -50,6 +51,8 @@ public class PostService {
                 .id(post.getId())
                 .title(post.getTitle())
                 .content(post.getContent())
+                .writtenBy(post.getWrittenBy())
+                .writtenDateTime(post.getWrittenDateTime())
                 .build();
     }
     // 여러개의 게시글 조회
@@ -96,4 +99,13 @@ public class PostService {
         return memberRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username + "을 찾을 수 없습니다."));
     }
+
+    public AuthResponse getCurrentMemberInfo() {
+        Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+        String username = authentication.getName(); // 현재 사용자의 email 얻기
+        Member member = memberRepository.findByEmail(username)
+                .orElseThrow(() -> new UsernameNotFoundException(username + "을 찾을 수 없습니다."));
+        return new AuthResponse(member.getEmail(), member.getName());
+    }
+
 }

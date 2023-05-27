@@ -16,27 +16,11 @@ public class AuthController {
 
     private final AuthService authService;
 
-//    @Autowired
-//    private AuthenticationManager authenticationManager;
-
-
     @PostMapping("/auth/signup")
     public void signup(@RequestBody Signup signup){
         authService.signup(signup);
     }
 
-//    @PostMapping("/auth/login")
-//    public String login(@RequestBody LoginRequest loginRequest) {
-//        Authentication authentication = authenticationManager.authenticate(
-//                new UsernamePasswordAuthenticationToken(
-//                        loginRequest.getUsername(),
-//                        loginRequest.getPassword()
-//                )
-//        );
-//
-//        SecurityContextHolder.getContext().setAuthentication(authentication);
-//        return "로그인 성공";
-//    }
 
 
 }

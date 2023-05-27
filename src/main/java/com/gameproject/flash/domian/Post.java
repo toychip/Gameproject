@@ -7,6 +7,8 @@ import lombok.NoArgsConstructor;
 
 import jakarta.persistence.*;
 
+import java.time.LocalDateTime;
+
 @Entity
 @NoArgsConstructor(access = AccessLevel.PUBLIC)
 @Getter
@@ -22,6 +24,7 @@ public class Post {
     private String content;
 
     private String writtenBy;
+    private LocalDateTime writtenDateTime;
 
     @Builder
     public Post(String title, String content, Member member, String writtenBy) {
@@ -29,6 +32,7 @@ public class Post {
         this.content = content;
         this.member = member;
         this.writtenBy = writtenBy;
+        this.writtenDateTime = LocalDateTime.now();
     }
 
     public PostEditor.PostEditorBuilder toEditor(){
@@ -42,6 +46,7 @@ public class Post {
         content = postEditor.getContent();
         this.member = member;
         this.writtenBy = writtenBy;
+        this.writtenDateTime = LocalDateTime.now();
     }
 
     @ManyToOne(fetch = FetchType.LAZY)
