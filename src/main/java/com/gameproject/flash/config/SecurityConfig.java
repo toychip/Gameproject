@@ -15,6 +15,7 @@ import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.security.crypto.scrypt.SCryptPasswordEncoder;
 import org.springframework.security.web.SecurityFilterChain;
+import org.springframework.session.web.http.DefaultCookieSerializer;
 import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
@@ -36,8 +37,8 @@ public class SecurityConfig {
                 .sessionManagement()
                 .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
                 .and()
-//                .cors()
-//                .and()
+                .cors()
+                .and()
                 .authorizeHttpRequests()
                     .requestMatchers("/auth/signup").permitAll() // 누구나 접근 가능
                     .requestMatchers("/auth/login").permitAll() // 누구나 접근 가능
@@ -59,10 +60,6 @@ public class SecurityConfig {
                     response.sendRedirect("/auth/login"); // 인증되지 않은 사용자에게 접근이 거부될 때 로그인 페이지로 리다이렉션
                 })
                 .and()
-                .rememberMe(rm -> rm.rememberMeParameter("remember")
-                        .alwaysRemember(false)
-                        .tokenValiditySeconds(2592000)
-                )
                 .csrf(AbstractHttpConfigurer::disable)
                 .build();
     }
@@ -85,6 +82,7 @@ public class SecurityConfig {
 
         config.setAllowCredentials(true);
         config.addAllowedOrigin("http://localhost:3000"); // Here! 원래 "http://localhost:8080" 부분을 수정해야 합니다.
+        config.addAllowedOrigin("https://5laksil.netlify.app/"); // 배포된 사이트 주소
         config.addAllowedHeader("*");
         config.addAllowedMethod("*");
 
@@ -101,5 +99,4 @@ public class SecurityConfig {
                 32,
                 64);
     }
-
 }
