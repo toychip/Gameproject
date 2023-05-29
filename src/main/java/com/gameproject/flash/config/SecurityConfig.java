@@ -20,6 +20,8 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import java.util.Arrays;
+
 @Configuration
 @EnableWebSecurity//()    // Todo 배포 전에 False로 바꾸기
 public class SecurityConfig {
@@ -35,8 +37,7 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         return http
                 .sessionManagement()
-                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED)
-                .and()
+                .sessionCreationPolicy(SessionCreationPolicy.IF_REQUIRED).and()
                 .cors()
                 .and()
                 .authorizeHttpRequests()
@@ -77,16 +78,13 @@ public class SecurityConfig {
     // CORS 설정을 위한 빈을 추가합니다.
     @Bean
     public CorsFilter corsFilter() {
+        CorsConfiguration configuration = new CorsConfiguration();
+        configuration.setAllowedOrigins(Arrays.asList("http://localhost:3000", "https://5laksil.netlify.app/")); // 허용되는 도메인 목록 설정
+        configuration.setAllowedMethods(Arrays.asList("*")); // 허용되는 HTTP 메서드 목록 설정
+        configuration.setAllowCredentials(true); // 쿠키 등을 허용
+        configuration.setAllowedHeaders(Arrays.asList("*")); // 허용되는 헤더 목록 설정
         UrlBasedCorsConfigurationSource source = new UrlBasedCorsConfigurationSource();
-        CorsConfiguration config = new CorsConfiguration();
-
-        config.setAllowCredentials(true);
-        config.addAllowedOrigin("http://localhost:3000"); // Here! 원래 "http://localhost:8080" 부분을 수정해야 합니다.
-        config.addAllowedOrigin("https://5laksil.netlify.app/"); // 배포된 사이트 주소
-        config.addAllowedHeader("*");
-        config.addAllowedMethod("*");
-
-        source.registerCorsConfiguration("/**", config);
+        source.registerCorsConfiguration("/**", configuration);
         return new CorsFilter(source);
     }
 
@@ -98,5 +96,13 @@ public class SecurityConfig {
                 1,
                 32,
                 64);
+    }
+
+    @Bean
+    public DefaultCookieSerializer cookieSerializer() {
+        DefaultCookieSerializer serializer = new DefaultCookieSerializer();
+        serializer.setSameSite("None"); // SameSite 설정을 None으로 변경
+        serializer.setUseSecureCookie(true); // Secure 설정 활성화
+        return serializer;
     }
 }
