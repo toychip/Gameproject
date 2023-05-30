@@ -1,4 +1,4 @@
-package com.gameproject.flash.config.data;
+package com.gameproject.flash.config;
 
 import com.gameproject.flash.domian.Member;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
