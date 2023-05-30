@@ -16,10 +16,17 @@ public class PostSearch {
     @Builder.Default
     private Integer size = 10;
 
+    private String title; // 검색할 제목
+    private String content; // 검색할 내용
+    private String writtenBy; // 작성자를 검색할 키워드
+
     @Builder
-    public PostSearch(Integer page, Integer size) {
+    public PostSearch(Integer page, Integer size, String title, String content, String writtenBy) {
         this.page = (page == null) ? 1 : page;
         this.size = (size == null) ? 10 : size;
+        this.title = title;
+        this.content = content;
+        this.writtenBy = writtenBy;
     }
 
     public long getOffset(){

@@ -1,5 +1,7 @@
 package com.gameproject.flash.config.security;
 
+import com.gameproject.flash.response.AuthResponse;
+import com.gameproject.flash.service.PostService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -7,11 +9,14 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 @RestController
-@RequestMapping("/api/v1/login-controller")
+@RequiredArgsConstructor
+
 public class LoginController {
 
-    @GetMapping
-    public ResponseEntity<String> sayHello() {
-        return ResponseEntity.ok("Hellop from secured endpoint");
+    private final PostService postService;
+
+    @GetMapping("/mypage")
+    public AuthResponse getMemberInfo() {
+        return postService.getCurrentMemberInfo();
     }
 }

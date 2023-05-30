@@ -43,6 +43,24 @@ public class PostController {
             postService.write(request);
     }
 
+    @GetMapping("/posts")
+    public ResponseEntity<List<PostResponse>> search(
+            @RequestParam(required = false) Integer page,
+            @RequestParam(required = false) Integer size,
+            @RequestParam(required = false) String title,
+            @RequestParam(required = false) String content,
+            @RequestParam(required = false) String writtenBy
+    ) {
+        PostSearch postSearch = PostSearch.builder()
+                .page(page)
+                .size(size)
+                .title(title)
+                .content(content)
+                .writtenBy(writtenBy)
+                .build();
+
+        return ResponseEntity.ok(postService.search(postSearch));
+    }
 
     @GetMapping("/posts/{postId}")
     public PostResponse get(@PathVariable Long postId) {
@@ -53,10 +71,10 @@ public class PostController {
 
     //조회 API
     // 여러개의 글 조회 API (1개의 글 Post을 가져오는 기능)
-    @GetMapping("/posts")
-    public List<PostResponse> getList(@ModelAttribute PostSearch postSearch) {
-        return postService.getList(postSearch);
-    }
+//    @GetMapping("/posts")
+//    public List<PostResponse> getList(@ModelAttribute PostSearch postSearch) {
+//        return postService.getList(postSearch);
+//    }
 
     @PatchMapping("/posts/{postId}")
     public void edit(@PathVariable Long postId, @RequestBody @Valid PostEdit request){
@@ -68,8 +86,5 @@ public class PostController {
         postService.delete(postId);
     }
 
-    @GetMapping("/mypage")
-    public AuthResponse getMemberInfo() {
-        return postService.getCurrentMemberInfo();
-    }
+
 }

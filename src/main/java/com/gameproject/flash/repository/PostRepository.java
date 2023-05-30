@@ -10,4 +10,5 @@ public interface PostRepository extends JpaRepository<Post, Long>, PostRepositor
 
 //    @EntityGraph(attributePaths = {"category", "member"})
     Optional<Post> findById(Long postId);
+
 }

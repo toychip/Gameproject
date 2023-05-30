@@ -55,14 +55,13 @@ public class PostService {
                 .writtenDateTime(post.getWrittenDateTime())
                 .build();
     }
-    // 여러개의 게시글 조회
-//    public List<PostResponse> getList(Pageable pageable) {
-////        Pageable pageable = PageRequest.of(page,10, Sort.by(Sort.Direction.DESC, "id"));
-//
-//        return postRepository.getList(1).stream()
-//                .map(post -> new PostResponse(post))
-//                .collect(Collectors.toList());
-//    }
+
+    public List<PostResponse> search(PostSearch postSearch) {
+        return postRepository.search(postSearch).stream()
+                .map(PostResponse::new)
+                .collect(Collectors.toList());
+    }
+
     public List<PostResponse> getList(PostSearch postSearch) {
 //        Pageable pageable = PageRequest.of(page,10, Sort.by(Sort.Direction.DESC, "id"));
         return postRepository.getList(postSearch).stream()
