@@ -10,6 +10,7 @@ import com.gameproject.flash.response.PostResponse;
 import com.gameproject.flash.service.PostService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 import jakarta.validation.Valid;
@@ -33,6 +34,7 @@ public class PostController {
  */
 
     private final PostService postService;
+
 
     @PostMapping("/posts")
 //    public Map<String, String> post(@RequestBody @Valid PostCreate request){
