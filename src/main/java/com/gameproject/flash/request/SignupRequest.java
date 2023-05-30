@@ -2,20 +2,19 @@ package com.gameproject.flash.request;
 
 import lombok.Builder;
 import lombok.Data;
-import lombok.NoArgsConstructor;
 
 @Data
 @Builder
-public class Signup {
+public class SignupRequest {
 
     private String email;
     private String name;
     private String password;
 
-    public Signup() {
+    public SignupRequest() {
     }
 
-    public Signup(String email, String name, String password) {
+    public SignupRequest(String email, String name, String password) {
         this.email = email;
         this.name = name;
         this.password = password;

@@ -6,7 +6,7 @@ plugins {
 }
 
 group = 'com.ttt'
-version = '1.5.5_Login'
+version = '1.9.0_final'
 sourceCompatibility = '17'
 
 configurations {

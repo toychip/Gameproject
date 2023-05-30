@@ -1,11 +1,9 @@
 package com.gameproject.flash.controller;
 
 
-import com.gameproject.flash.domian.Post;
-import com.gameproject.flash.request.PostCreate;
-import com.gameproject.flash.request.PostEdit;
-import com.gameproject.flash.request.PostSearch;
-import com.gameproject.flash.response.AuthResponse;
+import com.gameproject.flash.request.PostCreateRequest;
+import com.gameproject.flash.request.PostEditRequest;
+import com.gameproject.flash.request.PostSearchRequest;
 import com.gameproject.flash.response.PostResponse;
 import com.gameproject.flash.service.PostService;
 import lombok.RequiredArgsConstructor;
@@ -16,7 +14,6 @@ import org.springframework.web.bind.annotation.*;
 import jakarta.validation.Valid;
 
 import java.util.List;
-import java.util.Map;
 
 @Slf4j
 @RestController
@@ -37,8 +34,8 @@ public class PostController {
 
 
     @PostMapping("/posts")
-//    public Map<String, String> post(@RequestBody @Valid PostCreate request){
-    public void post(@RequestBody @Valid PostCreate request) {
+//    public Map<String, String> post(@RequestBody @Valid PostCreateRequest request){
+    public void post(@RequestBody @Valid PostCreateRequest request) {
             request.validate();
             postService.write(request);
     }
@@ -51,7 +48,7 @@ public class PostController {
             @RequestParam(required = false) String content,
             @RequestParam(required = false) String writtenBy
     ) {
-        PostSearch postSearch = PostSearch.builder()
+        PostSearchRequest postSearchRequest = PostSearchRequest.builder()
                 .page(page)
                 .size(size)
                 .title(title)
@@ -59,7 +56,7 @@ public class PostController {
                 .writtenBy(writtenBy)
                 .build();
 
-        return ResponseEntity.ok(postService.search(postSearch));
+        return ResponseEntity.ok(postService.search(postSearchRequest));
     }
 
     @GetMapping("/posts/{postId}")
@@ -72,12 +69,12 @@ public class PostController {
     //조회 API
     // 여러개의 글 조회 API (1개의 글 Post을 가져오는 기능)
 //    @GetMapping("/posts")
-//    public List<PostResponse> getList(@ModelAttribute PostSearch postSearch) {
+//    public List<PostResponse> getList(@ModelAttribute PostSearchRequest postSearch) {
 //        return postService.getList(postSearch);
 //    }
 
     @PatchMapping("/posts/{postId}")
-    public void edit(@PathVariable Long postId, @RequestBody @Valid PostEdit request){
+    public void edit(@PathVariable Long postId, @RequestBody @Valid PostEditRequest request){
         postService.edit(postId, request);
     }
 

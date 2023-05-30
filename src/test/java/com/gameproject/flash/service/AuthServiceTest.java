@@ -3,7 +3,7 @@
 //import com.gameproject.flash.domian.Member;
 //import com.gameproject.flash.exception.AlreadyExistsEmailException;
 //import com.gameproject.flash.repository.MemberRepository;
-//import com.gameproject.flash.request.Signup;
+//import com.gameproject.flash.request.SignupRequest;
 //import org.junit.jupiter.api.*;
 //import org.springframework.beans.factory.annotation.Autowired;
 //import org.springframework.boot.test.context.SpringBootTest;
@@ -31,7 +31,7 @@
 ////    void test1(){
 ////        //given
 ////        PasswordEncoder encoder = new PasswordEncoder();
-////        Signup signup = Signup.builder()
+////        SignupRequest signup = SignupRequest.builder()
 ////                .email("manager@naver.com")
 ////                .password("1234@@")
 ////                .name("임준형")
@@ -63,7 +63,7 @@
 //                .build();
 //        memberRepository.save(prevMember);
 //
-//        Signup signup = Signup.builder()
+//        SignupRequest signup = SignupRequest.builder()
 //                .email("toytoy@naver.com")
 //                .password("1234")
 //                .name("임준형")

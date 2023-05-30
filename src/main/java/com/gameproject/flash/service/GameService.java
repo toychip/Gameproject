@@ -33,4 +33,7 @@ public class GameService {
                 .orElseThrow(() -> new NotFoundException(id + "는 없는 id입니다."));
         return new GameResponse(game);
     }
+    public List<Game> searchGames(String name) {
+        return gameRepository.searchByName(name);
+    }
 }

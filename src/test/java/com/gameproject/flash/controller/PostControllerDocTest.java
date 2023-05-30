@@ -2,10 +2,10 @@
 //
 //
 //import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.gameproject.flash.request.PostCreate;
+//import com.gameproject.flash.request.PostCreateRequest;
 //import com.gameproject.flash.domian.Post;
 //import com.gameproject.flash.repository.PostRepository;
-//import com.gameproject.flash.request.Signup;
+//import com.gameproject.flash.request.SignupRequest;
 //import org.junit.jupiter.api.DisplayName;
 //import org.junit.jupiter.api.Test;
 //import org.junit.jupiter.api.extension.ExtendWith;
@@ -77,7 +77,7 @@
 //    @DisplayName("글 등록 - docsVer")
 //    void test2() throws Exception{
 //
-//        PostCreate request = PostCreate.builder()
+//        PostCreateRequest request = PostCreateRequest.builder()
 //                .title("ttt 제목")
 //                .content("내용입니다.")
 //                .build();
@@ -104,7 +104,7 @@
 //    @DisplayName("회원 가입 - docsVer")
 //    void test3() throws Exception{
 //
-//        Signup signup = Signup.builder()
+//        SignupRequest signup = SignupRequest.builder()
 //                .email("toytoy1234@naver.com")
 //                .password("1234")
 //                .name("임준형")

@@ -10,7 +10,7 @@ import jakarta.validation.constraints.NotBlank;
 @Getter
 @NoArgsConstructor
 //builder 가 있는 클래스는 생성자를 명시적으로 표현해야한다.
-public class PostCreate {
+public class PostCreateRequest {
 
     @NotBlank(message = "타이틀을 입력하세요.")
     private String title;
@@ -19,7 +19,7 @@ public class PostCreate {
     private String content;
 
     @Builder
-    public PostCreate(String title, String content) {
+    public PostCreateRequest(String title, String content) {
         this.title = title;
         this.content = content;
     }

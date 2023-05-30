@@ -1,10 +1,10 @@
 //package com.gameproject.flash.controller;
 //
 //import com.fasterxml.jackson.databind.ObjectMapper;
-//import com.gameproject.flash.request.PostCreate;
+//import com.gameproject.flash.request.PostCreateRequest;
 //import com.gameproject.flash.domian.Post;
 //import com.gameproject.flash.repository.PostRepository;
-//import com.gameproject.flash.request.PostEdit;
+//import com.gameproject.flash.request.PostEditRequest;
 //import org.junit.jupiter.api.Assertions;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.DisplayName;
@@ -51,7 +51,7 @@
 //    @DisplayName("글 작성 요청시 '/posts 요청시' title 값은 필수다.")
 //    void test2() throws Exception{
 //        // given
-//        PostCreate request = PostCreate.builder()
+//        PostCreateRequest request = PostCreateRequest.builder()
 ////                .title("제목입니다.")
 //                .content("내용입니다.")
 //                .build();
@@ -77,8 +77,8 @@
 //    @DisplayName("글 작성 요청시 '/posts' 요청시 DB에 값이 저장된다.")
 //    void test3() throws Exception{
 //        //given
-//        PostCreate requestPrev = new PostCreate("제목입니다.", "내용입니다.");
-//        PostCreate request = PostCreate.builder()
+//        PostCreateRequest requestPrev = new PostCreateRequest("제목입니다.", "내용입니다.");
+//        PostCreateRequest request = PostCreateRequest.builder()
 //                .title("제목입니다.")
 //                .content("내용입니다.")
 //                .build();
@@ -211,7 +211,7 @@
 //                .build();
 //
 //        postRepository.save(post);
-//        PostEdit postEdit = PostEdit.builder()
+//        PostEditRequest postEdit = PostEditRequest.builder()
 //                .title("임주희")
 //                .content("이것은 내용이지롱")
 //                .build();
@@ -235,7 +235,7 @@
 //                .build();
 //
 //        postRepository.save(post);
-//        PostEdit postEdit = PostEdit.builder()
+//        PostEditRequest postEdit = PostEditRequest.builder()
 //                .title("임준형")
 //                .content("저것은 내용이지롱")
 //                .build();
@@ -283,7 +283,7 @@
 //    @DisplayName("존재하지 않는 게시글 수정")
 //    void test11() throws Exception{
 //
-//        PostEdit postEdit = PostEdit.builder()
+//        PostEditRequest postEdit = PostEditRequest.builder()
 //                .title("임준형")
 //                .content("저것은 내용이지롱")
 //                .build();
@@ -301,7 +301,7 @@
 //    @DisplayName("게시글 작성시 제목에 '바보'는 포함될 수 없다.")
 //    void test12() throws Exception{
 //        //given
-//        PostCreate request = PostCreate.builder()
+//        PostCreateRequest request = PostCreateRequest.builder()
 //                .title("나는 바보입니다.")
 //                .content("내용입니다.")
 //                .build();

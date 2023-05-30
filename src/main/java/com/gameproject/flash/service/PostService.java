@@ -6,9 +6,9 @@ import com.gameproject.flash.domian.PostEditor;
 import com.gameproject.flash.exception.PostNotFound;
 import com.gameproject.flash.repository.MemberRepository;
 import com.gameproject.flash.repository.PostRepository;
-import com.gameproject.flash.request.PostCreate;
-import com.gameproject.flash.request.PostEdit;
-import com.gameproject.flash.request.PostSearch;
+import com.gameproject.flash.request.PostCreateRequest;
+import com.gameproject.flash.request.PostEditRequest;
+import com.gameproject.flash.request.PostSearchRequest;
 import com.gameproject.flash.response.AuthResponse;
 import com.gameproject.flash.response.PostResponse;
 import lombok.RequiredArgsConstructor;
@@ -29,16 +29,16 @@ import java.util.stream.Collectors;
 public class PostService {
     private final PostRepository postRepository;
     private final MemberRepository memberRepository;
-    public void write(PostCreate postCreate){
-        // postCreate -> Entity 형태로 바꿔주어야함. postCreate는 RequestDTO이기 때문
+    public void write(PostCreateRequest postCreateRequest){
+        // postCreateRequest -> Entity 형태로 바꿔주어야함. postCreate는 RequestDTO이기 때문
         Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
         String username = authentication.getName();  // 현재 사용자의 email 얻기
         Member member = memberRepository.findByEmail(username)
                 .orElseThrow(() -> new UsernameNotFoundException(username + "을 찾을 수 없습니다."));
 
         Post post = Post.builder()
-                .title(postCreate.getTitle())
-                .content(postCreate.getContent())
+                .title(postCreateRequest.getTitle())
+                .content(postCreateRequest.getContent())
                 .member(member)
                 .writtenBy(member.getName())
                 .build();
@@ -56,19 +56,19 @@ public class PostService {
                 .build();
     }
 
-    public List<PostResponse> search(PostSearch postSearch) {
-        return postRepository.search(postSearch).stream()
+    public List<PostResponse> search(PostSearchRequest postSearchRequest) {
+        return postRepository.search(postSearchRequest).stream()
                 .map(PostResponse::new)
                 .collect(Collectors.toList());
     }
 
-    public List<PostResponse> getList(PostSearch postSearch) {
+    public List<PostResponse> getList(PostSearchRequest postSearchRequest) {
 //        Pageable pageable = PageRequest.of(page,10, Sort.by(Sort.Direction.DESC, "id"));
-        return postRepository.getList(postSearch).stream()
+        return postRepository.getList(postSearchRequest).stream()
                 .map(PostResponse::new)
                 .collect(Collectors.toList());}
     @Transactional
-    public void edit(Long id, PostEdit postEdit){
+    public void edit(Long id, PostEditRequest postEditRequest){
         // 없는 id일경우
         Post post = postRepository.findById(id).orElseThrow(PostNotFound::new);
 
@@ -77,8 +77,8 @@ public class PostService {
             throw new AccessDeniedException("게시물을 수정할 권한이 없습니다.");
         }
         PostEditor.PostEditorBuilder editorBuitor = post.toEditor();
-        PostEditor postEditor = editorBuitor.title(postEdit.getTitle())
-                .content(postEdit.getContent())
+        PostEditor postEditor = editorBuitor.title(postEditRequest.getTitle())
+                .content(postEditRequest.getContent())
                 .build();
         post.edit(postEditor, currentMember, currentMember.getName());
     }

@@ -2,7 +2,7 @@
 //
 //import com.fasterxml.jackson.databind.ObjectMapper;
 //import com.gameproject.flash.repository.MemberRepository;
-//import com.gameproject.flash.request.Signup;
+//import com.gameproject.flash.request.SignupRequest;
 //import org.junit.jupiter.api.BeforeEach;
 //import org.junit.jupiter.api.DisplayName;
 //import org.junit.jupiter.api.Test;
@@ -179,7 +179,7 @@
 //    @DisplayName("회원가입")
 //    void test6() throws Exception {
 //        // given
-//        Signup signup = Signup.builder()
+//        SignupRequest signup = SignupRequest.builder()
 //                .email("toytoy@naver.com")
 //                .password("1234")
 //                .name("임준형")

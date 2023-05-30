@@ -1,4 +1,4 @@
-package com.gameproject.flash.controller;
+package com.gameproject.flash.domian;
 
 import lombok.Getter;
 import lombok.Setter;
